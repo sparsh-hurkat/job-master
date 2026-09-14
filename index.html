@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Board</title>
+  <style>
+    :root {
+      --bg: #0d0f1a;
+      --surface: #161929;
+      --surface2: #1e2238;
+      --border: #272d45;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --accent: #6366f1;
+      --accent-dim: rgba(99,102,241,0.15);
+      --blue: #38bdf8;
+      --blue-dim: rgba(56,189,248,0.12);
+      --purple: #c084fc;
+      --purple-dim: rgba(192,132,252,0.12);
+      --green: #4ade80;
+      --green-dim: rgba(74,222,128,0.12);
+      --r: 10px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 16px 60px;
+    }
+
+    /* ── Header ── */
+    header {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 28px 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .logo { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; }
+    .logo em { color: var(--accent); font-style: normal; }
+    .meta { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── Stats ── */
+    .stats {
+      max-width: 860px;
+      margin: 0 auto 20px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 600px) { .stats { grid-template-columns: repeat(3, 1fr); } }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 14px 16px;
+    }
+    .stat-n { font-size: 1.7rem; font-weight: 700; line-height: 1; }
+    .stat-l { font-size: 0.72rem; color: var(--muted); margin-top: 5px; }
+
+    /* ── Controls ── */
+    .controls {
+      max-width: 860px;
+      margin: 0 auto 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    #search {
+      flex: 1;
+      min-width: 180px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 9px 14px;
+      font-size: 0.88rem;
+      outline: none;
+      font-family: inherit;
+    }
+    #search::placeholder { color: var(--muted); }
+    #search:focus { border-color: var(--accent); }
+
+    .tabs {
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .tab {
+      background: none;
+      border: none;
+      color: var(--muted);
+      padding: 6px 13px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-family: inherit;
+      transition: background 0.12s, color 0.12s;
+      white-space: nowrap;
+    }
+    .tab.on { background: var(--accent); color: #fff; }
+    .tab:hover:not(.on) { background: var(--surface2); color: var(--text); }
+
+    /* ── Cards ── */
+    .cards {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 18px 20px;
+      transition: border-color 0.15s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card.applied { border-left: 3px solid var(--green); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 9px;
+    }
+    .card-tags { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+
+    .badge {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .badge-job { background: var(--blue-dim); color: var(--blue); }
+    .badge-post { background: var(--purple-dim); color: var(--purple); }
+    .badge-new { background: var(--accent-dim); color: var(--accent); }
+
+    .card-time { font-size: 0.75rem; color: var(--muted); flex-shrink: 0; }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: 3px;
+    }
+    .card-sub {
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .card-snippet {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 13px;
+      border-radius: 7px;
+      font-size: 0.81rem;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: opacity 0.12s, background 0.12s, border-color 0.12s;
+    }
+    .btn-view {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .btn-view:hover { opacity: 0.82; }
+    .btn-tailor {
+      background: none;
+      color: var(--muted);
+      cursor: default;
+      opacity: 0.55;
+    }
+    .btn-apply {
+      background: none;
+      color: var(--muted);
+      margin-left: auto;
+    }
+    .btn-apply:hover:not(.on) { border-color: var(--green); color: var(--green); }
+    .btn-apply.on { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+
+    /* ── Empty / Loading ── */
+    .msg {
+      text-align: center;
+      padding: 70px 20px;
+      color: var(--muted);
+    }
+    .msg h3 { font-size: 1rem; margin-bottom: 8px; color: var(--text); }
+    .msg p { font-size: 0.84rem; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Job<em>Board</em></div>
+  <div class="meta" id="last-updated">Loading…</div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n" id="s-new">–</div><div class="stat-l">New today</div></div>
+  <div class="stat"><div class="stat-n" id="s-total">–</div><div class="stat-l">Total</div></div>
+  <div class="stat"><div class="stat-n" id="s-list">–</div><div class="stat-l">Listings</div></div>
+  <div class="stat"><div class="stat-n" id="s-post">–</div><div class="stat-l">Social posts</div></div>
+  <div class="stat"><div class="stat-n" id="s-applied">–</div><div class="stat-l">Applied</div></div>
+</div>
+
+<div class="controls">
+  <input type="search" id="search" placeholder="Search title, company…" oninput="render()">
+  <div class="tabs">
+    <button class="tab on" data-f="all"     onclick="setF('all')">All</button>
+    <button class="tab"    data-f="listing"  onclick="setF('listing')">Listings</button>
+    <button class="tab"    data-f="post"     onclick="setF('post')">Posts</button>
+    <button class="tab"    data-f="applied"  onclick="setF('applied')">Applied</button>
+  </div>
+</div>
+
+<div class="cards" id="cards"></div>
+
+<script>
+  // ── State ─────────────────────────────────────────────────────
+  let jobs = [];
+  let filter = 'all';
+  let applied = {};
+  try { applied = JSON.parse(localStorage.getItem('jb_applied') || '{}'); } catch(_) {}
+
+  function saveApplied() {
+    try { localStorage.setItem('jb_applied', JSON.stringify(applied)); } catch(_) {}
+  }
+
+  // ── Helpers ───────────────────────────────────────────────────
+  function esc(s) {
+    return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function timeAgo(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d)) return iso;
+    const min = Math.floor((Date.now() - d) / 60000);
+    if (min < 2) return 'just now';
+    if (min < 60) return min + 'm ago';
+    const h = Math.floor(min / 60);
+    if (h < 24) return h + 'h ago';
+    return Math.floor(h / 24) + 'd ago';
+  }
+
+  function isToday(iso) {
+    if (!iso) return false;
+    const d = new Date(iso);
+    return !isNaN(d) && d.toDateString() === new Date().toDateString();
+  }
+
+  function isNew(job) {
+    const t = job.time_posted || job.scraped_at;
+    if (!t) return false;
+    return Date.now() - new Date(t) < 12 * 3600 * 1000;
+  }
+
+  // ── UI ────────────────────────────────────────────────────────
+  function setF(f) {
+    filter = f;
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.f === f));
+    render();
+  }
+
+  function toggleApplied(id) {
+    applied[id] ? delete applied[id] : (applied[id] = true);
+    saveApplied();
+    render();
+    updateStats();
+  }
+
+  function updateStats() {
+    const today = jobs.filter(j => isToday(j.time_posted || j.scraped_at));
+    document.getElementById('s-new').textContent = today.length;
+    document.getElementById('s-total').textContent = jobs.length;
+    document.getElementById('s-list').textContent = jobs.filter(j => j.type === 'job_listing').length;
+    document.getElementById('s-post').textContent = jobs.filter(j => j.type === 'social_post').length;
+    document.getElementById('s-applied').textContent = Object.keys(applied).length;
+  }
+
+  function render() {
+    const q = document.getElementById('search').value.trim().toLowerCase();
+    const el = document.getElementById('cards');
+
+    const visible = jobs.filter(j => {
+      if (filter === 'applied' && !applied[j.id]) return false;
+      if (filter === 'listing' && j.type !== 'job_listing') return false;
+      if (filter === 'post' && j.type !== 'social_post') return false;
+      if (q) {
+        const hay = [j.title, j.company, j.poster, j.location, j.snippet].join(' ').toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+
+    if (!visible.length) {
+      el.innerHTML = `<div class="msg"><h3>No jobs here</h3><p>${
+        q ? 'No matches for "' + esc(q) + '".' : filter === 'applied' ? "You haven't marked any jobs as applied yet." : 'Run the scraper to collect jobs.'
+      }</p></div>`;
+      return;
+    }
+
+    el.innerHTML = visible.map(j => {
+      const isListing = j.type === 'job_listing';
+      const isApplied = !!applied[j.id];
+      const title = j.title || (isListing ? 'Untitled Listing' : 'Hiring Post');
+      const sub = isListing
+        ? [j.company, j.location].filter(Boolean).join(' · ')
+        : ['Posted by ' + (j.poster || 'Unknown'), j.company ? '@ ' + j.company : ''].filter(Boolean).join(' ');
+      const t = j.time_posted || j.scraped_at;
+      return `<div class="card${isApplied ? ' applied' : ''}">
+        <div class="card-header">
+          <div class="card-tags">
+            <span class="badge ${isListing ? 'badge-job' : 'badge-post'}">${isListing ? '💼 Listing' : '💬 Post'}</span>
+            ${isNew(j) ? '<span class="badge badge-new">New</span>' : ''}
+          </div>
+          <span class="card-time">${timeAgo(t)}</span>
+        </div>
+        <div class="card-title">${esc(title)}</div>
+        <div class="card-sub">${esc(sub)}</div>
+        ${j.snippet ? `<div class="card-snippet">${esc(j.snippet)}</div>` : ''}
+        <div class="card-actions">
+          <a class="btn btn-view" href="${esc(j.link)}" target="_blank" rel="noopener">View ${isListing ? 'Job' : 'Post'} ↗</a>
+          <button class="btn btn-tailor" title="Coming soon — will generate a tailored resume for this role">📄 Tailor Resume</button>
+          <button class="btn btn-apply${isApplied ? ' on' : ''}" onclick="toggleApplied('${esc(j.id)}')">
+            ${isApplied ? '✅ Applied' : '○ Mark Applied'}
+          </button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ── Load data ─────────────────────────────────────────────────
+  fetch('./data/jobs.json?_=' + Date.now())
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => {
+      jobs = data.jobs || [];
+      const lu = data.last_updated ? new Date(data.last_updated).toLocaleString() : null;
+      document.getElementById('last-updated').textContent = lu ? 'Updated ' + lu : 'No scrape yet';
+      updateStats();
+      render();
+    })
+    .catch(() => {
+      document.getElementById('last-updated').textContent = 'Could not load data';
+      document.getElementById('cards').innerHTML = `<div class="msg">
+        <h3>data/jobs.json not found</h3>
+        <p>Make sure the file exists in your repo root and GitHub Pages is enabled.<br>Once the scraper runs, jobs will appear here automatically.</p>
+      </div>`;
+    });
+</script>
+</body>
+</html>
