@@ -1,6 +1,206 @@
 {
-  "last_updated": "2026-09-14T22:45:24Z",
+  "last_updated": "2026-09-15T00:05:30Z",
   "jobs": [
+    {
+      "title": "Software Engineer",
+      "company": "Cirrus Solutions, Inc.",
+      "location": "Palm City, FL (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4467274555/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "00005de5805f",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Full Stack Software Development Engineer",
+      "company": "Wedgewood",
+      "location": "Swedesboro, NJ (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4465232831/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "000078cb15be",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Torentify",
+      "location": "United States (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4467274756/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "00005de6693c",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "AI/ML Engineer",
+      "company": "Vanguard",
+      "location": "Malvern, PA (Hybrid)",
+      "link": "https://www.linkedin.com/jobs/view/4467280424/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "00005f617b39",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Audit Software Engineer Consultant II",
+      "company": "Allstate",
+      "location": "United States (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4466125600/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "0000475baa5c",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Java Software Engineer",
+      "company": "BeaconFire Inc.",
+      "location": "California, United States (Hybrid)",
+      "link": "https://www.linkedin.com/jobs/view/4463027894/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "00004c37cdcb",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "AI Product Engineer / Forward Deployed Engineer",
+      "company": "Lawrence Harvey",
+      "location": "United States (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4466135579/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "000045a72abe",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Associate Software Engineer",
+      "company": "Defense Unicorns",
+      "location": "United States (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4467277933/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "00005e11909e",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Software Engineer - Open Source Contributions",
+      "company": "micro1",
+      "location": "NAMER (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4467282886/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "00005f7f927b",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Associate Developer for IT Enterprise Applications",
+      "company": "University of Maryland, Baltimore (UMB)",
+      "location": "Baltimore, MD (Hybrid)",
+      "link": "https://www.linkedin.com/jobs/view/4467289818/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "00005fe21cf9",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Software Engineer, Cloud",
+      "company": "Stryker",
+      "location": "Menlo Park, CA (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4464869390/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "000062381fd9",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Software Engineer",
+      "company": "BC Law",
+      "location": "Florida, United States (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4457956949/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "000038a0fc20",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "ML Engineer",
+      "company": "Sundayy",
+      "location": "United States (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4467293871/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "000061427e3f",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Software Engineer 2 (TS/SCI with Poly)",
+      "company": "Solerity",
+      "location": "Fort Meade, MD (Hybrid)",
+      "link": "https://www.linkedin.com/jobs/view/4466121943/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "000047929be2",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "AI Software Engineer",
+      "company": "HireRising",
+      "location": "Scottsdale, AZ (Hybrid)",
+      "link": "https://www.linkedin.com/jobs/view/4466118944/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "000048e4cfdb",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Software Engineering Career Accelerator Program",
+      "company": "WorkUp",
+      "location": "Los Angeles, CA (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4466154050/",
+      "time_posted": "2026-09-14T23:55:50.620Z",
+      "type": "job_listing",
+      "id": "0000424ddf75",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Software Engineer, Applied Emerging Talent (2027)",
+      "company": "OpenAI",
+      "location": "San Francisco, CA (Hybrid)",
+      "link": "https://www.linkedin.com/jobs/view/4466121937/",
+      "time_posted": "2026-09-14T23:55:50.619Z",
+      "type": "job_listing",
+      "id": "000047929f27",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Vocation",
+      "location": "Salt Lake City, UT (Hybrid)",
+      "link": "https://www.linkedin.com/jobs/view/4467297396/",
+      "time_posted": "2026-09-14T23:55:50.619Z",
+      "type": "job_listing",
+      "id": "000061789e85",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "Machine Learning Engineer, Model Development — Entry Level",
+      "company": "Jobright.ai",
+      "location": "United States (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4466143293/",
+      "time_posted": "2026-09-14T23:55:50.619Z",
+      "type": "job_listing",
+      "id": "0000440fd776",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
+    {
+      "title": "FullStack Software Engineering Internship",
+      "company": "Elevated Web Design",
+      "location": "United States (Remote)",
+      "link": "https://www.linkedin.com/jobs/view/4467404413/",
+      "time_posted": "2026-09-14T23:55:50.619Z",
+      "type": "job_listing",
+      "id": "000044407919",
+      "scraped_at": "2026-09-15T00:05:30Z"
+    },
     {
       "title": "Hiring Post",
       "poster": "Sean Kavanaugh",
