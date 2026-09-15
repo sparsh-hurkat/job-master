@@ -21,6 +21,8 @@
       --green: #4ade80;
       --green-dim: rgba(74,222,128,0.12);
       --r: 10px;
+      --red: #f87171;
+      --red-dim: rgba(248,113,113,0.12);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -212,6 +214,35 @@
     }
     .btn-apply:hover:not(.on) { border-color: var(--green); color: var(--green); }
     .btn-apply.on { border-color: var(--green); color: var(--green); background: var(--green-dim); }
+    .btn-remove {
+      background: none;
+      color: var(--muted);
+      opacity: 0.45;
+      padding: 7px 10px;
+    }
+    .btn-remove:hover { border-color: var(--red); color: var(--red); opacity: 1; }
+
+    /* ── Removed banner ── */
+    .removed-bar {
+      max-width: 860px;
+      margin: 0 auto 12px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .removed-bar button {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .removed-bar button:hover { border-color: var(--red); color: var(--red); }
 
     /* ── Empty / Loading ── */
     .msg {
@@ -248,6 +279,7 @@
   </div>
 </div>
 
+<div class="removed-bar" id="removed-bar" hidden></div>
 <div class="cards" id="cards"></div>
 
 <script>
@@ -255,10 +287,15 @@
   let jobs = [];
   let filter = 'all';
   let applied = {};
+  let removed = {};
   try { applied = JSON.parse(localStorage.getItem('jb_applied') || '{}'); } catch(_) {}
+  try { removed = JSON.parse(localStorage.getItem('jb_removed') || '{}'); } catch(_) {}
 
   function saveApplied() {
     try { localStorage.setItem('jb_applied', JSON.stringify(applied)); } catch(_) {}
+  }
+  function saveRemoved() {
+    try { localStorage.setItem('jb_removed', JSON.stringify(removed)); } catch(_) {}
   }
 
   // ── Helpers ───────────────────────────────────────────────────
@@ -304,6 +341,28 @@
     updateStats();
   }
 
+  function removeJob(id) {
+    removed[id] = true;
+    saveRemoved();
+    render();
+    updateRemovedBar();
+  }
+
+  function restoreAll() {
+    removed = {};
+    saveRemoved();
+    render();
+    updateRemovedBar();
+  }
+
+  function updateRemovedBar() {
+    const bar = document.getElementById('removed-bar');
+    const n = Object.keys(removed).length;
+    if (n === 0) { bar.hidden = true; return; }
+    bar.hidden = false;
+    bar.innerHTML = `${n} listing${n === 1 ? '' : 's'} hidden &nbsp;<button onclick="restoreAll()">Restore all</button>`;
+  }
+
   function updateStats() {
     const today = jobs.filter(j => isToday(j.time_posted || j.scraped_at));
     document.getElementById('s-new').textContent = today.length;
@@ -318,6 +377,7 @@
     const el = document.getElementById('cards');
 
     const visible = jobs.filter(j => {
+      if (removed[j.id]) return false;
       if (filter === 'applied' && !applied[j.id]) return false;
       if (filter === 'listing' && j.type !== 'job_listing') return false;
       if (filter === 'post' && j.type !== 'social_post') return false;
@@ -360,6 +420,7 @@
           <button class="btn btn-apply${isApplied ? ' on' : ''}" onclick="toggleApplied('${esc(j.id)}')">
             ${isApplied ? '✅ Applied' : '○ Mark Applied'}
           </button>
+          <button class="btn btn-remove" onclick="removeJob('${esc(j.id)}')" title="Hide this listing">✕</button>
         </div>
       </div>`;
     }).join('');
@@ -374,6 +435,7 @@
       document.getElementById('last-updated').textContent = lu ? 'Updated ' + lu : 'No scrape yet';
       updateStats();
       render();
+      updateRemovedBar();
     })
     .catch(() => {
       document.getElementById('last-updated').textContent = 'Could not load data';
